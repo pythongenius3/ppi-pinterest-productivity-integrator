@@ -1,6 +1,55 @@
-architecture/
+architecture/ +-----------------+         +-----------------------+
+|     Slack       | ----->  |   slack_listener.py   |
++-----------------+         +-----------+-----------+
+                                        |
+                                        v
+                            +-----------+-----------+
+                            |  workflow_controller  |
+                            +-----------+-----------+
+                                        |
+        +-----------------------+-------+------------------------+
+        |                       |                               |
+        v                       v                               v
++---------------+      +-------------------+          +----------------------+
+| jira_ticket_  |      | gworkspace_logger |          | generate_csv_report  |
+|  creator.py   |      |       .py         |          |        .py           |
++-------+-------+      +---------+---------+          +-----------+----------+
+        |                        |                                |
+        v                        v                                v
+  Jira issue / ID       Request log CSV / sheet          Summary CSV report
+
 config/
 scripts/
 docs/
 sample_data/
 logs/
+1. Slack user submits request
+2. slack_listener.py parses mock_slack_payload.json
+3. workflow_controller.py receives RequestEvent
+4. workflow_controller.py calls jira_ticket_creator.create_jira_ticket()
+5. jira_ticket_creator.py returns ticket key / ID
+6. workflow_controller.py calls gworkspace_logger.log_request()
+7. gworkspace_logger.py writes a row to request_log.csv
+8. workflow_controller.py calls generate_csv_report.build_summary()
+9. generate_csv_report.py updates example_csv_report.csv
+10. workflow_controller.py logs the full workflow in logs/ppi_activity_log.txt
+Slack Request Received
+        |
+        v
+Validate Payload -----> Invalid? -----> Log error and stop
+        |
+        v
+Create Jira Ticket ----> Failure? ----> Log failure and stop
+        |
+        v
+Log to Request Log CSV
+        |
+        v
+Generate / Update Summary CSV
+        |
+        v
+Write Activity Log
+        |
+        v
+Return Success Result
+
