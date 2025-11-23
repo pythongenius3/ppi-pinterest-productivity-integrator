@@ -1,0 +1,10 @@
+1. Slack user submits request
+2. slack_listener.py parses mock_slack_payload.json
+3. workflow_controller.py receives RequestEvent
+4. workflow_controller.py calls jira_ticket_creator.create_jira_ticket_from_event()
+5. jira_ticket_creator.py returns ticket key / ID
+6. workflow_controller.py calls gworkspace_logger.log_request_to_csv()
+7. gworkspace_logger.py writes a row to request_log.csv
+8. workflow_controller.py calls generate_csv_report.build_summary_report()
+9. generate_csv_report.py updates example_csv_report.csv
+10. workflow_controller.py writes to logs/ppi_activity_log.txt

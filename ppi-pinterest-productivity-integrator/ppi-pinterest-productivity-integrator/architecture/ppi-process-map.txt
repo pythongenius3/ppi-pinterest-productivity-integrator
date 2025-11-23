@@ -1,0 +1,19 @@
+Slack Request Received
+        |
+        v
+Validate Payload -----> Invalid? -----> Log error and stop
+        |
+        v
+Create Jira Ticket ----> Failure? ----> Log failure and stop
+        |
+        v
+Log to Request Log CSV
+        |
+        v
+Generate / Update Summary CSV
+        |
+        v
+Write Activity Log
+        |
+        v
+Return Success Result

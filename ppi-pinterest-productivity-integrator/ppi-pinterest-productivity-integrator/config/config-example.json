@@ -1,0 +1,17 @@
+{
+  "jira": {
+    "base_url": "https://your-domain.atlassian.net",
+    "project_key": "IT",
+    "email": "your-email@example.com",
+    "api_token": "your-api-token"
+  },
+  "logging": {
+    "activity_log_path": "logs/ppi_activity_log.txt"
+  },
+  "paths": {
+    "request_log_csv": "sample_data/request_log.csv",
+    "summary_csv": "sample_data/example_csv_report.csv",
+    "mock_slack_payload": "sample_data/mock_slack_payload.json",
+    "mock_jira_response": "sample_data/sample_jira_response.json"
+  }
+}
