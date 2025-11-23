@@ -1,0 +1,6 @@
+architecture/
+config/
+scripts/
+docs/
+sample_data/
+logs/
